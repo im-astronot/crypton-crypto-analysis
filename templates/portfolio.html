@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Crypto Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-4dOE4w4kzlJ1xJyNynV7+Yt8reN+XOaFZgJhE2Gc1wAsx7z+3hEtdm7JgTETTSD9XQ0ZsB0SmJdwdeMZk4wF0w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+        /* HEADER */
+      /* 1. Set the background color of the navigation bar */
+      .navbar {
+        background-color: black;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      /* 2. Set the foreground color of the navigation bar */
+      .navbar-dark .navbar-brand,
+      .navbar-dark .navbar-nav .nav-link {
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      /* 3. Add hover effect on the navigation links */
+      .navbar-dark .navbar-nav .nav-link:hover {
+        text-decoration: none;
+        color: rgb(93, 158, 217);
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .navbar-dark .navbar-nav .nav-link::after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 0;
+        background: transparent;
+        transition: width 0.3s ease, background-color 0.3s ease;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .navbar-dark .navbar-nav .nav-link:hover::after {
+        width: 100%;
+        background-color: rgb(93, 158, 217);
+        transform-origin: 50% 50%;
+        transform: scale(1, 1.5);
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      /* 4. Add a rectangle around the navbar brand text */
+      .navbar-brand {
+        padding: 8px 16px;
+        background-color: rgb(29, 73, 199);
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      /* 5. Set the hover effect for the navbar brand */
+      .navbar-brand:hover {
+        background-color: rgb(29, 73, 199);
+        color: black;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      /* BODY */
+      body {
+        background-color: rgb(34, 34, 34);
+      }
+
+      .header-text {
+        background-color: rgb(29, 73, 199);
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 25px;
+        display: inline-block;
+      }
+        
+      /* Style the scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px; /* Set width of the scrollbar */
+      }
+
+      /* Style the scrollbar track */
+      ::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      /* Style the scrollbar thumb */
+      ::-webkit-scrollbar-thumb {
+        background-color: rgb(93, 158, 217);
+        border-radius: 5px;
+      }
+
+      /* Change scrollbar thumb on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+
+      /* Style the button */
+      #myBtn {
+        display: none; /* Hide the button initially */
+        position: fixed; /* Fixed/sticky position */
+        bottom: 20px; /* Place the button at the bottom of the page */
+        right: 30px; /* Place the button 30px from the right */
+        z-index: 99; /* Make sure it does not overlap */
+        border: none; /* Remove borders */
+        outline: none; /* Remove outline */
+        background-color: #555; /* Set a background color */
+        color: white; /* Text color */
+        cursor: pointer; /* Add a mouse pointer on hover */
+        padding: 15px; /* Some padding */
+        border-radius: 50%; /* Remove border radius to make it rounded */
+      }
+
+      /* On hover, add a darker background color */
+      #myBtn:hover {
+        background-color: rgb(93, 158, 217);
+      }
+
+      /* Add a FontAwesome icon */
+      #myBtn i {
+        font-size: 20px;
+      }
+
+      .fa-arrow-up {
+        margin-left: 2px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* When the user scrolls down 20px from the top of the document, show the button */
+      @media screen and (min-width: 768px) {
+        #myBtn {
+          display: none;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+        }
+      }  
+    </style>
+</head>
+<body>
+
+    <!--NAVBAR-->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <a class="navbar-brand" href="/" style="font-size: 20px">Crypton</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/price">Cryptocurrencies</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/news">News</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sentiment">Sentiments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tweets">Tweets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/convert">Converter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/predict">Price Forecast</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/portfolio">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tradesignal">Trade Signals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About Us</a>
+            </li>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+      <heading>
+        <div class="container mt-5">
+          <div class="text-center">
+            <h1 class="header-text">
+              <div class="crypto-logo"></div>
+              Portfolio
+            </h1>
+          </div>
+        </div>
+      </heading>
+
+
+      <style>
+        .form-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .input-field {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 10px;
+        }
+        
+        .input-field label {
+          margin-bottom: 5px;
+        }
+        
+        .input-field input[type="text"],
+        .input-field .form-select,
+        .input-field input[type="number"] {
+          width: 300px;
+          height: 32px;
+          border: 2px solid rgb(93, 158, 217);
+          border-radius: 4px;
+          padding: 0 10px;
+          background-color: #333;
+          color: #fff;
+        }
+        
+        .submit-button input[type="submit"] {
+          width: 150px;
+          height: 40px;
+          background-color: rgb(93, 158, 217);
+          color: #fff;
+          border: 2px solid rgb(93, 158, 217);
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+          align-self: center; /* Added */
+        }
+        
+        .submit-button input[type="submit"]:hover {
+          background-color: rgb(93, 158, 217);
+          cursor: pointer;
+          color: black;
+        }
+      </style>
+      
+      <div class="container mt-5">
+        <form method="post" action="/portfolio" class="form-container">
+          {{ form.hidden_tag() }}
+          <div class="input-field">
+            <label for="{{ form.asset_id.id }}">Asset:</label>
+            {{ form.asset_id(class_="input-text") }}
+          </div>
+          <div class="input-field">
+            <label for="{{ form.quantity.id }}">Quantity:</label>
+            {{ form.quantity(class_="input-number") }}
+          </div>
+          <div class="input-field">
+            <label for="{{ form.purchase_price.id }}">Purchase Price:</label>
+            {{ form.purchase_price(class_="input-number") }}
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Add Asset">
+          </div>
+        </form>
+      </div>
+
+    <style>
+      /* TABLE */
+    .table thead {
+      background-color: rgb(69, 69, 69);
+      color: white;
+    }
+
+    .table tbody tr {
+      background-color: rgb(48, 48, 48);
+      height: 60px; /* Change this to the desired height */
+    }
+
+    .table tbody tr:hover {
+      background-color: rgb(27, 27, 27);
+      cursor: pointer;
+    }
+
+    .table tbody tr:hover .coin-info {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    .container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .table td {
+      vertical-align: middle;
+    }
+  </style>
+
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Icons</th>
+                    <th>Asset</th>
+                    <th>Quantity</th>
+                    <th>Purchase Price</th>
+                    <th>Current Price</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in portfolio_data %}
+                <tr>
+                <td class="icon-cell" data-asset="{{ item.asset }}"></td>
+                <td>{{ item.asset }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.purchase_price }}</td>
+                    <td>{{ item.current_price if item.current_price is not none else 'N/A' }}</td>
+                    <td>{{ item.value if item.value is not none else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+      /* Change the font size of the tweet text */
+      .card-text {
+        font-size: larger;
+        text-align: center;
+      }
+
+      /* Add a hover effect to the cards */
+      .card:hover {
+        box-shadow: 0 0 10px gray;
+      }
+
+      /* Change the background color and add a border to the cards */
+      .card {
+        /*background-color: #333333;*/
+        border: 2px solid rgb(93, 158, 217);
+        text-align: center;
+      }
+    </style>
+
+    <div class="container mt-3">
+        <div id="plot"></div>
+        <div class="container mt-3">
+          <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <div class="card-body">
+                <h5>Total Portfolio value in U.S. Dollar (USD): ${{ total_value }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container mt-3 d-flex justify-content-center">
+      <div class="alert alert-dismissible alert-info py-3 px-4" style="background-color: rgb(93, 158, 217)">
+        <a href="{{ url_for('download') }}" download class="alert-link">Download Portfolio as JSON file</a>
+      </div>
+    </div>
+    
+    <div style="width: 50%; margin: 35px auto;">
+        <canvas id="pie-chart"></canvas>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      async function fetchIconUrl(asset) {
+        const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.toLowerCase()}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
+        const data = await response.json();
+        if (data.length > 0) {
+            return data[0].image;
+        }
+        return null;
+    }
+
+    async function insertIcons() {
+        const iconCells = document.querySelectorAll('.icon-cell');
+        for (const iconCell of iconCells) {
+            const asset = iconCell.dataset.asset;
+            const iconUrl = await fetchIconUrl(asset);
+            if (iconUrl) {
+                const imgElement = document.createElement('img');
+                imgElement.src = iconUrl;
+                imgElement.width = 32;
+                imgElement.height = 32;
+                iconCell.appendChild(imgElement);
+            }
+        }
+    }
+
+    insertIcons();
+        async function addIconToTable(asset) {
+            const iconUrl = await getCoinIcon(asset);
+            const assetCells = document.querySelectorAll('tbody tr td:first-child');
+
+            assetCells.forEach(cell => {
+                if (cell.textContent === asset) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = iconUrl;
+                    imgElement.alt = `${asset} icon`;
+                    imgElement.width = 24;
+                    imgElement.height = 24;
+                    imgElement.style.marginRight = '10px';
+                    cell.prepend(imgElement);
+                }
+            });
+        }
+          
+       // Get the portfolio data from the HTML table
+        const portfolioTable = document.querySelector('table');
+        const portfolioRows = portfolioTable.querySelectorAll('tbody tr');
+        const portfolioData = [];
+        portfolioRows.forEach(row => {
+            const rowData = {};
+            rowData.asset = row.querySelector('td:nth-child(1)').textContent;
+            rowData.quantity = parseFloat(row.querySelector('td:nth-child(2)').textContent);
+            rowData.purchasePrice = parseFloat(row.querySelector('td:nth-child(3)').textContent);
+            rowData.currentPrice = parseFloat(row.querySelector('td:nth-child(4)').textContent);
+            rowData.value = parseFloat(row.querySelector('td:nth-child(5)').textContent);
+            portfolioData.push(rowData);
+        });
+        const pieChart = new Chart(document.getElementById('pie-chart'), {
+            type: 'pie',
+            data: {
+                labels: portfolioData.map(asset => asset.asset),
+                datasets: [{
+                    data: portfolioData.map(asset => asset.value),
+                    backgroundColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#cc65fe',
+                        '#ffce56',
+                        '#33ffcc',
+                        '#cc99ff',
+                        '#99ffcc'
+                    ]
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        fontColor: '#fff',
+                        fontSize: 16,
+                        padding: 20
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Portfolio Allocation by Asset',
+                    fontColor: '#fff',
+                    fontSize: 24
+                }
+            }
+        });
+      </script>
+       
+      <!--SCROLL TO TOP BUTTON-->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">
+      <i class="fa fa-arrow-up"></i>
+    </button>
+    <script>
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("myBtn").style.display = "block";
+        } else {
+          document.getElementById("myBtn").style.display = "none";
+        }
+      }
+
+      function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
+
+    <!--FOOTER-->
+    <style>
+      footer {
+        font-size: 14px;
+        color: #fff;
+        line-height: 1.5;
+        margin-top: 2rem; /* Add margin to the top of the footer */
+      }
+      footer a {
+        color: #fff;
+        text-decoration: none;
+      }
+      footer h4 {
+        color: #fff;
+      }
+      footer ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      footer .list-inline-item {
+        margin-right: 1rem;
+      }
+      footer hr {
+        border-color: rgba(255, 255, 255, 0.1);
+        margin: 2rem 0;
+      }
+      @media (max-width: 576px) {
+        footer .col-sm-12 {
+          margin-bottom: 2rem;
+        }
+      }
+      ul.list-unstyled li a:hover {
+        color: rgb(93, 158, 217);
+      }
+      a:hover i {
+        color: rgb(93, 158, 217);
+      }
+    </style>
+
+    <footer class="bg-dark py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <h4 class="text-light mb-4">About Us</h4>
+            <p class="text-muted">
+              Crypton is dedicated to providing you with up-to-date information
+              about cryptocurrency prices, news, market trends, and many more.
+              We aim to be your go-to source for all things crypto.
+            </p>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <h4 class="text-light mb-4">Links</h4>
+            <ul class="list-unstyled">
+              <li><a href="/">Home</a></li>
+              <li><a href="/price">Cryptocurrencies</a></li>
+              <li><a href="/news">News</a></li>
+              <li><a href="/sentiment">Sentiments</a></li>
+              <li><a href="/tweets">Tweets</a></li>
+              <li><a href="/convert">Converter</a></li>
+              <li><a href="/predict">Price Forecast</a></li>
+              <li><a href="/portfolio">Portfolio</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <h4 class="text-light mb-4">Contact Us</h4>
+            <p class="text-muted mb-0">You can contact us through our social media accounts:</p>
+            <div class="mt-2">
+                <a href="https://www.linkedin.com/" target="_blank" class="mr-3"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" class="mr-3"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://twitter.com/" target="_blank" class="mr-3"><i class="fab fa-twitter fa-2x"></i></a>
+            </div>
+          </div>        
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="text-muted mb-0">
+              Crypton &copy; 2023. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Include Bootstrap JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.3/dist/umd/popper.min.js"
+      integrity="sha384-9XUhqZ1dFpfI3q3WcYG7rM79Kfjed7h9pi1tR9RtHBLiZQx7Zn8AGPOQD7YMeh1"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>

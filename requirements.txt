@@ -1,0 +1,22 @@
+#Use the below commands to create a virtual environment for the project
+python -m venv venv
+venv/Scripts/activate
+
+#Open terminal in VS code and use the below command to install the required libraries
+pip install tweepy requests textblob pandas scikit-learn plotly Flask Flask-WTF yfinance numpy technical-analysis ta
+
+#Use the below command to run the application within the virtual environment
+flask run
+
+------------------------------------------------------------------------------------------------------------------
+# If transferred to another local system then delete the venv directory permanently and execute teh below commands
+------------------------------------------------------------------------------------------------------------------
+#Use the below commands to create a virtual environment for the project
+python -m venv venv
+venv/Scripts/activate
+
+#Open terminal in VS code and use the below command to install the required libraries
+pip install tweepy requests textblob pandas scikit-learn plotly Flask Flask-WTF yfinance numpy technical-analysis ta
+
+#Use the below command to run the application within the virtual environment
+flask run
