@@ -22,19 +22,10 @@ from ta.momentum import RSIIndicator
 from datetime import datetime, timedelta
 
 
-# Replace these with your own API keys and access tokens
-consumer_key = '7BiZZAzW9GUaIJC9DNqrLym2E'
-consumer_secret = 'i6rZ67Bnu69vX8y9mp1iCkmCOyRGi3fEd6HaOV1jLnnZgUfxph'
-access_token = '1165642044418584578-H6wr2Sh0cLT6I9EPSBOHrVTVYflrnl'
-access_token_secret = 'qymyEpl7bchJGoYw5bKeICKrgjJOOqVe9TqlQ3j9Qlju8'
-
 auth = tweepy.OAuth1UserHandler(consumer_key, consumer_secret, access_token, access_token_secret)
 api = tweepy.API(auth)
 
 app = Flask(__name__)
-
-API_KEY = "147a568c05addd16378d7c22cef935c3921e2a840c3c76c5927cd59b087a4eb4"
-api_url = "https://api.coingecko.com/api/v3"
 
 
 @app.route('/')
@@ -42,8 +33,7 @@ def index():
     return render_template('index.html')
 
 
-CRYPTOCOMPARE_API_KEY = "fc4f150dc04c4388a124b3969e0f52065bbc3b5301101209256f1c1325623a03"
-CRYPTOCOMPARE_API_URL = "https://min-api.cryptocompare.com/data/top/totalvolfull"
+
 
 def get_top_crypto_data(limit=100):
     params = {
@@ -107,10 +97,9 @@ def intcomma_filter(value):
 
 @app.route('/news')
 def news():
-    # Make a GET request to the CryptoCompare API to get the latest cryptocurrency news
     response = requests.get('https://min-api.cryptocompare.com/data/v2/news/', params={
         'lang': 'EN',
-        'api_key': '147a568c05addd16378d7c22cef935c3921e2a840c3c76c5927cd59b087a4eb4'
+        
     })
     data = response.json()
 
